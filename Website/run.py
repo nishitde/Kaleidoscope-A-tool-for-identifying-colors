@@ -1,6 +1,3 @@
-# Name: Nishit De, E-mail: npd57@drexel.edu
-# CS530: DUI Project
-
 from flask import Flask, render_template, send_file, g, request, jsonify, session, escape, redirect
 from passlib.hash import pbkdf2_sha256
 import os
