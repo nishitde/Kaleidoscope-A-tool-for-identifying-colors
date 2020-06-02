@@ -22,6 +22,39 @@ html, body{
   font-size: 250%;
 }
 
+/* Upload Image */
+#ImageTitle {
+  font-family: 'Baloo 2', cursive;
+  font-size: 250%;
+  margin-top: 3%;
+}
+
+#inpFile {
+  margin-top: 2%;
+  margin-bottom: 1%;
+  margin-left: 10%;
+}
+
+.image-preview {
+  width: 700px;
+  min-height: 400px;
+  border: 2px solid #dddddd;
+  margin-top: 15px;
+  margin-left: 18%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 125%;
+  color: #cccccc;
+}
+
+.image-preview__image {
+  display: none;
+  width: 100%;
+}
+
 /* Card Details */
 #card1 {
   height: 600px;
