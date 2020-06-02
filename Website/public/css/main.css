@@ -72,7 +72,7 @@ html, body{
 
 /* Footer Details */
 #footer1 {
-  margin-top: 15px;
+  margin-top: 2.5%;
 }
 
 #FooterHead {
@@ -95,13 +95,22 @@ html, body{
 }
 
 #ConnectHeader {
-  margin-top: 2.5rem;
+  margin-top: 1.5rem;
+}
+
+#ConnectName {
+  font-size: 120%;
 }
 
 #ConnectIconImage {
-  height: 40px;
-  width: 40px;
-  margin-left: 10px;
+  height: 30px;
+  width: 30px;
+  margin-left: 2px;
+  margin-bottom: 2%;
+}
+
+#ConnectVl {
+  height: 20%;
 }
 
 #footer {
@@ -111,6 +120,8 @@ html, body{
 .vl {
   margin-top: 25px;
   margin-left: 120px;
+  border-left: 1px solid #808080;
+  height: 90%;
 }
 
 #footer1 {
