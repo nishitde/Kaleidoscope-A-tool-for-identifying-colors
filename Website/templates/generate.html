@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% set active = "Generate" %}
+
+{% block title %}
+Generate Survey
+{% endblock %}
+
+{% block content %}
+
+<h2 align="center" id="GeneratePageTitle">Create your very own Survey</h2>
+<p align="justify" id="GeneratePageData">Surveys allow researchers to collect a large amount of data in a relatively short period. They are less expensive than many other data collection techniques. Surveys can be used to collect information on a broad range of things, including personal facts, attitudes, past behaviors, and opinions. Hence, set an appropriate Title for your Survey. You can add up to <b>5 questions max</b>, with an option of <b>deleting</b> them as well. Each question can have multiple solutions which shall be displayed in the format of <b>Radio Buttons</b>.</p>
+<form action="/form" method="POST">
+  <div class="form-group row">
+    <label for="FormControlTextarea1" class="col-sm-2 col-form-label">Title</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" id="FormControlTextarea1" rows="1" name="title" required></textarea>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="FormControlTextarea" class="col-sm-2 col-form-label">Question Number</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" id="FormControlTextarea2" rows="1" name="question_no1" placeholder="Enter a numeric value between 1 - 5" required></textarea>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="FormControlTextarea2" class="col-sm-2 col-form-label">Question</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" id="FormControlTextarea2" rows="3" name="question1" required></textarea>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="FormControlTextarea3" class="col-sm-2 col-form-label">Answers</label>
+    <div class="col-sm-4" id="AddOption">
+      <textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer1" required></textarea>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="FormControlTextarea3" class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-4" id="AddOption">
+      <textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer1_a" required></textarea>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="FormControlTextarea3" class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-4" id="AddOption">
+      <textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer1_b" required></textarea>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="FormControlTextarea3" class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-4" id="AddOption">
+      <textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer1_c" required></textarea>
+    </div>
+  </div>
+  <div id="Question"></div>
+  <div class="col">
+    <button type="button" class="btn btn-outline-dark" id="NewQuestion" onclick="addQuestion(); style.display = 'none';">Add another Question</button>
+  </div>
+  <div class="col">
+    <button type="button" class="btn btn-outline-dark" id="NewQuestion" onclick="addQuestion1(); style.display = 'none';">Add another Question</button>
+  </div>
+  <div class="col">
+    <button type="button" class="btn btn-outline-dark" id="NewQuestion" onclick="addQuestion2(); style.display = 'none';">Add another Question</button>
+  </div>
+  <div class="col">
+    <button type="button" class="btn btn-outline-dark" id="NewQuestion" onclick="addQuestion3(); style.display = 'none';">Add another Question</button>
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-outline-dark" id="SubmitButton" onclick="alert('Survey Submitted!')">Submit</button>
+    <button type="reset" class="btn btn-dark" id="ResetButton">Reset</button>
+  </div>
+</form>
+
+<script>
+  function addQuestion() {
+    var div = document.createElement('div');
+    div.setAttribute('class', 'post block bc2');
+    div.innerHTML = '<div id="parent"><div class="form-group row"><label for="FormControlTextarea" class="col-sm-2 col-form-label">Question Number</label><div class="col-sm-10"><textarea class="form-control" id="FormControlTextarea2" rows="1" name="question_no2" placeholder="Enter a numeric value between 1 - 5" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea2" class="col-sm-2 col-form-label">Question</label><div class="col-sm-10"><textarea class="form-control" id="FormControlTextarea2" rows="3" name="question2" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea3" class="col-sm-2 col-form-label">Answers</label><div class="col-sm-4" id="AddOption"><textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer2" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea3" class="col-sm-2 col-form-label"></label><div class="col-sm-4" id="AddOption"><textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer2_a" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea3" class="col-sm-2 col-form-label"></label><div class="col-sm-4" id="AddOption"><textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer2_b" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea3" class="col-sm-2 col-form-label"></label><div class="col-sm-4" id="AddOption"><textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer2_c" required></textarea></div></div><button type="button" class="btn btn-dark" id="RemoveQuestion" onclick="deleteQuestion()">Delete Question</button></div>'
+    document.getElementById('Question').appendChild(div);
+  }
+
+  function deleteQuestion() {
+    var div = document.getElementById('parent');
+    div.parentNode.removeChild(div);
+  }
+</script>
+
+<script>
+  function addQuestion1() {
+    var div = document.createElement('div');
+    div.setAttribute('class', 'post block bc3');
+    div.innerHTML = '<div id="parent1"><div class="form-group row"><label for="FormControlTextarea" class="col-sm-2 col-form-label">Question Number</label><div class="col-sm-10"><textarea class="form-control" id="FormControlTextarea2" rows="1" name="question_no3" placeholder="Enter a numeric value between 1 - 5" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea2" class="col-sm-2 col-form-label">Question</label><div class="col-sm-10"><textarea class="form-control" id="FormControlTextarea2" rows="3" name="question3" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea3" class="col-sm-2 col-form-label">Answers</label><div class="col-sm-4" id="AddOption"><textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer3" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea3" class="col-sm-2 col-form-label"></label><div class="col-sm-4" id="AddOption"><textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer3_a" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea3" class="col-sm-2 col-form-label"></label><div class="col-sm-4" id="AddOption"><textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer3_b" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea3" class="col-sm-2 col-form-label"></label><div class="col-sm-4" id="AddOption"><textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer3_c" required></textarea></div></div><button type="button" class="btn btn-dark" id="RemoveQuestion" onclick="deleteQuestion1()">Delete Question</button></div>'
+    document.getElementById('Question').appendChild(div);
+  }
+
+  function deleteQuestion1() {
+    var div = document.getElementById('parent1');
+    div.parentNode.removeChild(div);
+  }
+</script>
+
+<script>
+  function addQuestion2() {
+    var div = document.createElement('div');
+    div.setAttribute('class', 'post block bc4');
+    div.innerHTML = '<div id="parent2"><div class="form-group row"><label for="FormControlTextarea" class="col-sm-2 col-form-label">Question Number</label><div class="col-sm-10"><textarea class="form-control" id="FormControlTextarea2" rows="1" name="question_no4" placeholder="Enter a numeric value between 1 - 5" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea2" class="col-sm-2 col-form-label">Question</label><div class="col-sm-10"><textarea class="form-control" id="FormControlTextarea2" rows="3" name="question4" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea3" class="col-sm-2 col-form-label">Answers</label><div class="col-sm-4" id="AddOption"><textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer4" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea3" class="col-sm-2 col-form-label"></label><div class="col-sm-4" id="AddOption"><textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer4_a" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea3" class="col-sm-2 col-form-label"></label><div class="col-sm-4" id="AddOption"><textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer4_b" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea3" class="col-sm-2 col-form-label"></label><div class="col-sm-4" id="AddOption"><textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer4_c" required></textarea></div></div><button type="button" class="btn btn-dark" id="RemoveQuestion" onclick="deleteQuestion2()">Delete Question</button></div>'
+    document.getElementById('Question').appendChild(div);
+  }
+
+  function deleteQuestion2() {
+    var div = document.getElementById('parent2');
+    div.parentNode.removeChild(div);
+  }
+</script>
+
+<script>
+  function addQuestion3() {
+    var div = document.createElement('div');
+    div.setAttribute('class', 'post block bc5');
+    div.innerHTML = '<div id="parent3"><div class="form-group row"><label for="FormControlTextarea" class="col-sm-2 col-form-label">Question Number</label><div class="col-sm-10"><textarea class="form-control" id="FormControlTextarea2" rows="1" name="question_no5" placeholder="Enter a numeric value between 1 - 5" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea2" class="col-sm-2 col-form-label">Question</label><div class="col-sm-10"><textarea class="form-control" id="FormControlTextarea2" rows="3" name="question5" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea3" class="col-sm-2 col-form-label">Answers</label><div class="col-sm-4" id="AddOption"><textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer5" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea3" class="col-sm-2 col-form-label"></label><div class="col-sm-4" id="AddOption"><textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer5_a" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea3" class="col-sm-2 col-form-label"></label><div class="col-sm-4" id="AddOption"><textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer5_b" required></textarea></div></div><div class="form-group row"><label for="FormControlTextarea3" class="col-sm-2 col-form-label"></label><div class="col-sm-4" id="AddOption"><textarea class="form-control" id="FormControlTextarea3" rows="1" name="answer5_c" required></textarea></div></div><button type="button" class="btn btn-dark" id="RemoveQuestion" onclick="deleteQuestion3()">Delete Question</button></div>'
+    document.getElementById('Question').appendChild(div);
+  }
+
+  function deleteQuestion3() {
+    var div = document.getElementById('parent3');
+    div.parentNode.removeChild(div);
+  }
+</script>
+
+{% endblock %}

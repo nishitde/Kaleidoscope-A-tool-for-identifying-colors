@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% set active = "Browse" %}
+
+{% block title %}
+My Survey
+{% endblock %}
+
+{% block content %}
+
+<h2 align="center" id="SurveyPageTitle">View all posted Surveys</h2>
+
+<div id="accordion">
+  {% for row in rows %}
+  <div class="card" id="Collapsible">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-dark collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" id="TitleButton">
+          {{row["title"]}}
+        </button>
+      </h5>
+    </div>
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <div class="rows" align="center">
+          Work in progress to display contents. Sorry for the inconvenience.
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

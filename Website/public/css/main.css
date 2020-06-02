@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap');
+
+html, body{
+  height: 100%;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  color: #222;
+}
+
+/* Navbar Details */
+.navbar {
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,0.25);
+}
+
+.navbar-brand {
+  font-family: 'Fredoka One', cursive;
+  align-items: center;
+  height: 70px;
+  margin-left: 39%;
+  font-size: 250%;
+}
+
+/* Card Details */
+#card1 {
+  height: 600px;
+  width: 300px;
+  margin-left: 6%;
+  margin-bottom: 2.5rem;
+}
+
+#cardTitle {
+  font-family: 'Baloo 2', cursive;
+  font-size: 250%;
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+}
+
+/* Footer Details */
+#footer1 {
+  margin-top: 15px;
+}
+
+#FooterHead {
+  font-family: 'Fredoka One', cursive;
+  font-size: 175%;
+}
+
+#SmallLine {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+#FooterText {
+  margin-bottom: 5px;
+}
+
+#footerLink {
+  margin-top: -10px;
+  margin-bottom: 8px;
+}
+
+#ConnectHeader {
+  margin-top: 2.5rem;
+}
+
+#ConnectIconImage {
+  height: 40px;
+  width: 40px;
+  margin-left: 10px;
+}
+
+#footer {
+  background-color: #D3D3D3;
+}
+
+.vl {
+  margin-top: 25px;
+  margin-left: 120px;
+}
+
+#footer1 {
+  margin-left: 120px;
+}
+
+#footer2 {
+  margin-left: -230px;
+}

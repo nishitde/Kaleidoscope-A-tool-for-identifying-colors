@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% set active = "Home" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<!-- About me Card -->
+<div class="container-fluid padding">
+<div class="row welcome text-center">
+  <div class="col-12">
+    <h1 class="display-4" id="cardTitle">Developers</h1>
+  </div>
+  <hr>
+</div>
+</div>
+
+<div class="container-fluid padding">
+<div class="row text-center padding">
+  <div class="col-4">
+    <div class="card" id="card1">
+      <img class="card-img-top" src="/img/card.jpg">
+      <div class="card-body">
+        <h4 class="card-title">Nishit De</h4>
+        <p align="justify" class="card-text">Nishit has completed his undergraduate in Computer Engineering in 2019, and didn't have a job then. Now, he is currently pursuing Masters in Computer Science from Drexel University, and still doesn't have a job. Don't be like Nishit, get a job. And, maybe, give him one too.</p>
+        <a href="https://github.com/nishitde" class="btn btn-dark" target="_blank">See Projects</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-4">
+    <div class="card" id="card1">
+      <img class="card-img-top" src="/img/card1.jpg">
+      <div class="card-body">
+        <h4 class="card-title">Aishwarya Patil</h4>
+        <p align="justify" class="card-text">Aishwarya has completed her undergraduate in Electrical Engineering in 2015, and didn't have a job then. Now, she is currently pursuing Masters in Computer Science from Drexel University, and still doesn't have a job. Don't be like Aishwarya, get a job. And, maybe, give her one too.</p>
+        <a href="https://github.com/nishitde" class="btn btn-dark" target="_blank">See Projects</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-4">
+    <div class="card" id="card1">
+      <img class="card-img-top" src="/img/card2.jpg">
+      <div class="card-body">
+        <h4 class="card-title">Atharva Deshpande</h4>
+        <p align="justify" class="card-text">Atharva has completed his undergraduate in Computer Engineering in 2019, and didn't have a job then. Now, he is currently pursuing Masters in Computer Science from Drexel University, and still doesn't have a job. Don't be like Atharva, get a job. And, maybe, give him one too.</p>
+        <a href="https://github.com/nishitde" class="btn btn-dark" target="_blank">See Projects</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+{% endblock %}

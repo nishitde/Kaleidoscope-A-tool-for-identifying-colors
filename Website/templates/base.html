@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Survey Generator :{% block title %}{% endblock %}</title>
+    <link href="/course/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <script src="/course/lib/jquery/jquery-3.3.1.min.js"></script>
+    <script src="/course/lib/popper/popper.min.js"></script>
+    <script src="/course/lib/bootstrap/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+      <div class="container">
+        <a class="navbar-brand" href="/">Kaleidoscope</a>
+        <div class="collapse navbar-collapse" id="navbarResponsive"></div>
+      </div>
+    </nav>
+
+    <main>
+      <div class="container content">
+          {% block content %}{% endblock %}
+      </div>
+
+      <!-- Footer -->
+      <footer id="footer">
+      <div class="container-fluid padding">
+      <div class="row text-center">
+        <div class="col-md-4" id="footer1">
+          <a id="FooterHead">Kaleidoscope</a>
+          <hr class="light" width="70%" id="SmallLine">
+          <p id="FooterText">Drexel University</p>
+          <p id="FooterText">Department of Computer Science</p>
+          <p id="FooterText">Philadelphia, PA, 19104</p>
+        </div>
+        <div class="col-md-4">
+          <style>
+          .vl {
+            border-left: 1px solid #808080;
+            height: 90%;
+          }
+          </style>
+          <div class="vl"></div>
+        </div>
+        <div class="col-md-4" id="footer2">
+          <h4 id="ConnectHeader">CONNECT</h4>
+          <hr class="light" width="50%">
+          <div class="col">
+            <a href="https://www.facebook.com/nishit.de/" target="_blank"><img src="/img/facebook-square-brands.svg" id="ConnectIconImage" class="filter-blue"></a>
+            <a href="https://www.instagram.com/de_nishit97/" target="_blank"><img src="/img/instagram-brands.svg" id="ConnectIconImage" class="filter-purple"></a>
+            <a href="https://www.linkedin.com/in/nishitde/" target="_blank"><img src="/img/linkedin-brands.svg" id="ConnectIconImage" class="filter-darkblue"></a>
+          </div>
+        </div>
+        <div class="col-12">
+          <hr class="light">
+          <p id="footerLink">&copy; Kaleidoscope</p>
+        </div>
+      </div>
+      </div>
+      </footer>
+    </main>
+  </body>
+</html>
