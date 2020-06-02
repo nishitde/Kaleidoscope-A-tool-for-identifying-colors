@@ -20,6 +20,7 @@ Home
 <div class="container-fluid padding">
 <div class="row text-center padding">
   <div class="col-12">
+    <form enctype = "multipart/form-data" action = "save_file.py" method = "post">
     <input type="file" name="inpFile" id="inpFile" hidden="hidden">
     <a class="btn btn-dark" id="inpFileButton">Choose File</a>
     <span id="custom-text">No file chosen</span>
@@ -27,6 +28,8 @@ Home
       <img src="" alt="Image Preview" class="image-preview__image">
       <span class="image-preview__default-text">Image Preview</span>
     </div>
+    <input type="submit" value="Upload" id="Upload" hidden="hidden">
+    <a class="btn btn-dark" id="UploadButton">Upload File</a>
   </div>
 </div>
 </div>
@@ -35,12 +38,18 @@ Home
   const inpFile = document.getElementById("inpFile");
   const customBtn = document.getElementById("inpFileButton");
   const customTxt = document.getElementById("custom-text");
+  const upload = document.getElementById("Upload")
+  const customUploadBtn = document.getElementById("UploadButton");
   const previewContainer = document.getElementById("imagePreview");
   const previewImage = previewContainer.querySelector(".image-preview__image");
   const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
 
   customBtn.addEventListener("click", function() {
     inpFile.click();
+  });
+
+  customUploadBtn.addEventListener("click", function() {
+    upload.click();
   });
 
   inpFile.addEventListener("change", function() {

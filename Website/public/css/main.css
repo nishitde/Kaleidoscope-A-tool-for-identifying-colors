@@ -27,6 +27,11 @@ html, body{
   color: white;
 }
 
+#UploadButton {
+  color: white;
+  margin-top: 1%;
+}
+
 #ImageTitle {
   font-family: 'Baloo 2', cursive;
   font-size: 250%;
