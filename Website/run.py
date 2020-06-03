@@ -24,10 +24,10 @@ def close_connection(exception):
 def index():
     return render_template('index.html')
 
-# Handle any files that begin "/course" by loading from the course directory
-@app.route('/course/<path:path>')
+# Handle any files that begin "/" by loading from the packages directory
+@app.route('/packages/<path:path>')
 def base_static(path):
-    return send_file(os.path.join(app.root_path, '..', 'course', path))
+    return send_file(os.path.join(app.root_path, '..', 'packages', path))
 
 # Handles the Sign-up operation
 @app.route('/signup', methods=['GET', 'POST'])
