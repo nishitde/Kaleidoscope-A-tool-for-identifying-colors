@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
 
 html, body{
   height: 100%;
@@ -29,11 +29,11 @@ html, body{
 
 #UploadButton {
   color: white;
-  margin-top: 1%;
+  margin-top: 2%;
 }
 
 #ImageTitle {
-  font-family: 'Baloo 2', cursive;
+  font-family: 'Merriweather', serif;
   font-size: 250%;
   margin-top: 3%;
   margin-bottom: 3%;
@@ -64,6 +64,25 @@ html, body{
   width: 100%;
 }
 
+/* View All Images Details */
+#ViewImageText {
+  text-align: center;
+  font-size: 120%;
+  margin-top: 7%;
+}
+
+.ViewImageBtn {
+  text-align: center;
+}
+
+/* Select a color Details */
+#ChooseColorText {
+  text-align: center;
+  font-size: 120%;
+  margin-top: 7%;
+  margin-bottom: 2%;
+}
+
 /* Card Details */
 #card1 {
   height: 600px;
@@ -73,7 +92,7 @@ html, body{
 }
 
 #cardTitle {
-  font-family: 'Baloo 2', cursive;
+  font-family: 'Merriweather', serif;
   font-size: 250%;
   margin-top: 4rem;
   margin-bottom: 3rem;
@@ -150,4 +169,38 @@ html, body{
 
 #AllImages, #ColorDifferentiatedImages {
   margin-top: 20px;
+}
+
+/* File_saved page details */
+#BackHead {
+  font-family: 'Merriweather', serif;
+  text-align: center;
+  margin-top: 12%;
+}
+
+#BackLine {
+  text-align: center;
+  margin-top: 3%;
+}
+
+.BackBtn {
+  text-align: center;
+  margin-bottom: 11%;
+}
+
+/* Miscellaneous Edits */
+#ImageListHead, #SelectedImageHead {
+  font-family: 'Merriweather', serif;
+  text-align: center;
+  margin-top: 3%;
+}
+
+.UploadedBackBtn {
+  text-align: center;
+  margin-bottom: 5%;
+}
+
+.SelectedBackBtn {
+  text-align: center;
+  margin-bottom: 5%;
 }

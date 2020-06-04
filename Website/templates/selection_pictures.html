@@ -8,6 +8,8 @@ Selected Pictures
 {% block content %}
 
 <!--Display all Selected Pictures by choosing the color -->
+<h1 id="SelectedImageHead">Color sorted Images</h1>
+
 <div class="indent">
   <div class="container" >
     <div class="row">
@@ -20,6 +22,11 @@ Selected Pictures
       {% endfor %}
     </div>
   </div>
+</div>
+
+<p id="BackLine">Click on 'Back' to return to the previous page.</p>
+<div class="SelectedBackBtn">
+  <a href="/" class="btn btn-dark" id="BackBtn">Back</a>
 </div>
 
 <script>

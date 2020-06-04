@@ -11,7 +11,7 @@ Home
 <div class="container-fluid padding">
 <div class="row welcome text-center">
   <div class="col-12">
-    <h1 class="display-4" id="ImageTitle">Upload an Image of your choice</h1>
+    <h1 class="display-4" id="ImageTitle">Upload an Image</h1>
   </div>
   <hr>
 </div>
@@ -21,7 +21,7 @@ Home
 <div class="row text-center padding">
   <div class="col-12">
     <form enctype = "multipart/form-data" action = "/uploader" method = "POST">
-    <input type="file" name="inpFile" id="inpFile" accept=".png, .jpg, .jpeg" hidden="hidden">
+    <input type="file" onclick="enableUpload()" name="inpFile" id="inpFile" accept=".png, .jpg, .jpeg" hidden="hidden" required>
     <a class="btn btn-dark" id="inpFileButton">Choose File</a>
     <span id="custom-text">No file chosen</span>
     <div class="image-preview" id="imagePreview">
@@ -29,21 +29,27 @@ Home
       <span class="image-preview__default-text">Image Preview</span>
     </div>
     <input type="submit" value="Upload" id="Upload" hidden="hidden">
-    <a class="btn btn-dark" id="UploadButton">Upload File</a>
+    <button class="btn btn-dark" id="UploadButton" disabled>Upload File</button>
     </form>
   </div>
 </div>
 </div>
 
-<div class="row text-center padding">
-  <div class="col-6" id="ViewAllText">
-    <p>Wish to view all your images?</p>
-  </div>
-  <div class="col-6" id="ViewAllBtn">
-    <a href="/pictures" class="btn btn-dark">View all</a>
-  </div>
+<script>
+  /* Enable the upload button */
+  function enableUpload() {
+    $('#UploadButton').prop('disabled', false);
+  }
+</script>
+
+<!-- View All Images -->
+<p id="ViewImageText">Wish to view all your images?</p>
+<div class="ViewImageBtn">
+  <a href="/pictures" class="btn btn-dark">View all</a>
 </div>
 
+<!-- Choose a color -->
+<p id="ChooseColorText">Select a color from the drop-down list:</p>
 <div class="col-md-6 offset-md-3">
   <form method="POST" action="/store_color">
     <div class="row thank">

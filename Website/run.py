@@ -4,7 +4,6 @@ import os
 import sqlite3
 from db import Database
 from sklearn.cluster import KMeans
-import matplotlib.pyplot as plt
 import numpy as np
 import cv2
 from collections import Counter
@@ -31,12 +30,12 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
-# Handle the home page
+# Handle the home page.
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# Handle any files that begin "/" by loading from the packages directory
+# Handle any files that begin "/" by loading from the packages directory.
 @app.route('/packages/<path:path>')
 def base_static(path):
     return send_file(os.path.join(app.root_path, '..', 'packages', path))
@@ -46,6 +45,7 @@ def api_imageList():
     img = get_db().images_list()
     return jsonify(img)
 
+# Handles the insertion of images in the Database.
 @app.route('/pictures')
 def pictures():
     a = get_db().load_images()
@@ -54,6 +54,7 @@ def pictures():
     else:
         return render_template('pictures.html')
 
+# Handles the task of uploading the file onto a physical memory.
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload_file():
    if request.method == 'POST':
@@ -62,12 +63,14 @@ def upload_file():
           filename = secure_filename(f.filename)
           print("filename '" +filename+ "' is uploaded.")
           f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-      return 'File uploaded successfully!'
+      return render_template('file_saved.html')
 
+# Function to find the Hex values of the colors that we identify.
 def RGB2HEX(color):
     return "#{:02x}{:02x}{:02x}".format(int(color[0]), int(color[1]), int(color[2]))
 
-def get_colors(image, number_of_colors, show_chart):
+# Function to flatten the array to pass as input, and to arrange the colors in the right order.
+def get_colors(image, number_of_colors):
     modified_image = cv2.resize(image, (600, 400), interpolation=cv2.INTER_AREA)
     modified_image = modified_image.reshape(modified_image.shape[0] * modified_image.shape[1], 3)
 
@@ -83,14 +86,11 @@ def get_colors(image, number_of_colors, show_chart):
     hex_colors = [RGB2HEX(ordered_colors[i]) for i in counts.keys()]
     rgb_colors = [ordered_colors[i] for i in counts.keys()]
 
-    if (show_chart):
-        plt.figure(figsize=(8, 6))
-        plt.pie(counts.values(), labels=hex_colors, colors=hex_colors)
-
     return rgb_colors
 
+# Function to try and match to the top 10 color of the images. We use rgb2lab to convert the values, and compute differences using cie colorspace.
 def match_image_by_color(image, color, threshold=60, number_of_colors=10):
-    image_colors = get_colors(image, number_of_colors, False)
+    image_colors = get_colors(image, number_of_colors)
     selected_color = rgb2lab(np.uint8(np.asarray([[color]])))
 
     select_image = False
@@ -102,6 +102,7 @@ def match_image_by_color(image, color, threshold=60, number_of_colors=10):
 
     return select_image
 
+# Function to go through all images in the set, and return relevant images as output.
 def show_selected_images(images, image_names, color, threshold, colors_to_match):
     index = 1
 
@@ -116,18 +117,20 @@ def show_selected_images(images, image_names, color, threshold, colors_to_match)
 
     return selected_images
 
+# Handles the storing of colors in the Database.
 @app.route('/store_color', methods=['GET', 'POST'])
 def store_color():
     name = ""
     hey = []
     if request.method == 'POST':
-        print("Computing the images to be displayed based on the selected color...")
+        print("\nComputing the images to be displayed based on the selected color...")
         image_names = []
         name = request.form['colorname']
         name = name.upper()
         get_db().create_color(name)
         images = get_db().get_image_matrix()
         for file in os.listdir(UPLOAD_FOLDER):
+            print("Finished scanning '" +file+ "'")
             image_names.append(file)
         hey = show_selected_images(images, image_names, COLORS[name], 60, 5)
         get_db().delete_color()
