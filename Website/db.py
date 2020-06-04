@@ -1,8 +1,12 @@
 import os
 import re
 import sqlite3
+import cv2
 
-SQLITE_PATH = os.path.join(os.path.dirname(__file__), 'survey.db')
+SQLITE_PATH = os.path.join(os.path.dirname(__file__), 'kaleidoscope.db')
+IMAGE_DIRECTORY = 'D:\Drexel Work\Spring-20\Computer Vision\Project\Kaleidoscope-A-tool-for-identifying-colors\Website\public\img'
+
+image_names = []
 
 class Database:
 
@@ -19,28 +23,44 @@ class Database:
         c.execute(sql, parameters)
         self.conn.commit()
 
-    def create_user(self, username, encryptedpassword):
-        self.execute('INSERT OR IGNORE INTO users (username, encryptedpassword) VALUES (?, ?)', [username, encryptedpassword])
+    def images_list(self):
+        img = self.select('SELECT * FROM Images')
+        return img
 
-    def get_user(self, username):
-        data = self.select('SELECT * FROM users WHERE username=?', [username])
-        if data:
-            d = data[0]
-            return {
-                'username': d[0],
-                'encryptedpassword': d[1],
-            }
-        else:
-            return None
+    def load_images(self):
+        for file in os.listdir(IMAGE_DIRECTORY):
+            image_names.append(file)
+        try:
+            for i in image_names[1:]:
+                self.execute('INSERT INTO Images (Name) VALUES (?)', [i])
+            return "Good"
+        except sqlite3.Error as er:
+            return er
 
-    def create_survey(self, title):
-        self.execute('INSERT OR IGNORE INTO survey (title) VALUES (?)', [title])
+    def create_images(self, name):
+        try:
+            self.execute('INSERT INTO Images (Name) VALUES (?)', [name])
+            return "Good"
+        except sqlite3.Error as er:
+            return er
 
-    def create_question(self, title, question_id, question):
-        self.execute('INSERT OR IGNORE INTO question (title, question_id, question) VALUES (?, ?, ?)', [title, question_id, question])
+    def get_image_matrix(self):
+        images = []
+        for file in os.listdir(IMAGE_DIRECTORY):
+            if file.endswith(".jpg") or file.endswith(".png") or file.endswith(".jpeg"):
+                images.append(self.get_image(os.path.join(IMAGE_DIRECTORY, file)))
+        return images
 
-    def create_answer(self, question_id, answer):
-        self.execute('INSERT OR IGNORE INTO answer (question_id, answer) VALUES (?, ?)', [question_id, answer])
+    def get_image(self, image_path):
+        image = cv2.imread(image_path)
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        return image
+
+    def create_color(self, name):
+        self.execute('INSERT INTO colors (Name) VALUES (?)',[name])
+
+    def delete_color(self):
+        self.execute('DELETE FROM colors')
 
     def close(self):
         self.conn.close()

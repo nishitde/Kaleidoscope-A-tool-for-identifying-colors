@@ -3,9 +3,21 @@ from passlib.hash import pbkdf2_sha256
 import os
 import sqlite3
 from db import Database
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+import numpy as np
+import cv2
+from collections import Counter
+from skimage.color import rgb2lab, deltaE_cie76
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__, static_folder='public', static_url_path='')
 app.secret_key = b'lkj98t&%$3rhfSwu3D'
+UPLOAD_FOLDER = 'D:\Drexel Work\Spring-20\Computer Vision\Project\Kaleidoscope-A-tool-for-identifying-colors\Website\public\img'
+IMAGE_DIRECTORY = 'D:\Drexel Work\Spring-20\Computer Vision\Project\Kaleidoscope-A-tool-for-identifying-colors\Website\public\img'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+COLORS = {'GREEN': [0, 128, 0], 'BLUE': [0, 0, 128], 'YELLOW': [255, 255, 0], 'WHITE':[255, 255, 255], 'RED' : [204, 0, 0], 'BLACK' : [1, 1, 1]}
 
 def get_db():
     db = getattr(g, '_database', None)
@@ -29,128 +41,98 @@ def index():
 def base_static(path):
     return send_file(os.path.join(app.root_path, '..', 'packages', path))
 
-# Handles the Sign-up operation
-@app.route('/signup', methods=['GET', 'POST'])
-def create_user():
-    if request.method == 'POST':
-        username = request.form['username']
-        typed_password = request.form['password']
-        if username and typed_password:
-            encryptedpassword = pbkdf2_sha256.encrypt(typed_password, rounds=200000, salt_size=16)
-            get_db().create_user(username, encryptedpassword)
-            return redirect('/')
-    return render_template('index.html')
+@app.route('/api/imagesList')
+def api_imageList():
+    img = get_db().images_list()
+    return jsonify(img)
 
-# Handles the Log-In operation
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    message = None
-    if request.method == 'POST':
-        username = request.form['username']
-        typed_password = request.form['password']
-        if username and typed_password:
-            user = get_db().get_user(username)
-            if user:
-                if pbkdf2_sha256.verify(typed_password, user['encryptedpassword']):
-                    session['user'] = user
-                    return redirect('/')
-                else:
-                    message = "Incorrect password, please try again"
-            else:
-                message = "Unknown user, please try again"
-        elif username and not typed_password:
-            message = "Missing password, please try again"
-        elif not username and typed_password:
-            message = "Missing username, please try again"
-    return render_template('index.html', message=message)
-
-# Handles the Log-Out operation
-@app.route('/logout')
-def logout():
-    session.pop('user', None)
-    return redirect('/')
-
-# Routes to pages depending if 'User' is in session or not
-@app.route('/<name>')
-def generic(name):
-    if 'user' in session:
-        return render_template(name + '.html')
+@app.route('/pictures')
+def pictures():
+    a = get_db().load_images()
+    if a == "Good":
+        return render_template('pictures.html')
     else:
-        return render_template(name + '.html')
+        return render_template('pictures.html')
 
-# Handles the uploading of the title in the Database
-@app.route('/form', methods=['GET', 'POST'])
-def create_survey():
+@app.route('/uploader', methods = ['GET', 'POST'])
+def upload_file():
+   if request.method == 'POST':
+      f = request.files['inpFile']
+      if f:
+          filename = secure_filename(f.filename)
+          print("filename '" +filename+ "' is uploaded.")
+          f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+      return 'File uploaded successfully!'
+
+def RGB2HEX(color):
+    return "#{:02x}{:02x}{:02x}".format(int(color[0]), int(color[1]), int(color[2]))
+
+def get_colors(image, number_of_colors, show_chart):
+    modified_image = cv2.resize(image, (600, 400), interpolation=cv2.INTER_AREA)
+    modified_image = modified_image.reshape(modified_image.shape[0] * modified_image.shape[1], 3)
+
+    clf = KMeans(n_clusters=number_of_colors)
+    labels = clf.fit_predict(modified_image)
+
+    counts = Counter(labels)
+    counts = dict(sorted(counts.items()))
+
+    center_colors = clf.cluster_centers_
+
+    ordered_colors = [center_colors[i] for i in counts.keys()]
+    hex_colors = [RGB2HEX(ordered_colors[i]) for i in counts.keys()]
+    rgb_colors = [ordered_colors[i] for i in counts.keys()]
+
+    if (show_chart):
+        plt.figure(figsize=(8, 6))
+        plt.pie(counts.values(), labels=hex_colors, colors=hex_colors)
+
+    return rgb_colors
+
+def match_image_by_color(image, color, threshold=60, number_of_colors=10):
+    image_colors = get_colors(image, number_of_colors, False)
+    selected_color = rgb2lab(np.uint8(np.asarray([[color]])))
+
+    select_image = False
+    for i in range(number_of_colors):
+        curr_color = rgb2lab(np.uint8(np.asarray([[image_colors[i]]])))
+        diff = deltaE_cie76(selected_color, curr_color)
+        if (diff < threshold):
+            select_image = True
+
+    return select_image
+
+def show_selected_images(images, image_names, color, threshold, colors_to_match):
+    index = 1
+
+    selected_images = []
+
+    for i in range(len(images)):
+        selected = match_image_by_color(images[i], color, threshold, colors_to_match)
+        if (selected):
+            selected_images.append(image_names[i])
+            index += 1
+    print("Selected Images:", selected_images)
+
+    return selected_images
+
+@app.route('/store_color', methods=['GET', 'POST'])
+def store_color():
+    name = ""
+    hey = []
     if request.method == 'POST':
-        title = request.form['title']
-        get_db().create_survey(title)
-        question1 = request.form['question1']
-        question_id1 = request.form['question_no1']
-        get_db().create_question(title, question_id1, question1)
-        answer1 = request.form['answer1']
-        answer1_a = request.form['answer1_a']
-        answer1_b = request.form['answer1_b']
-        answer1_c = request.form['answer1_c']
-        get_db().create_answer(question_id1, answer1)
-        get_db().create_answer(question_id1, answer1_a)
-        get_db().create_answer(question_id1, answer1_b)
-        get_db().create_answer(question_id1, answer1_c)
-        question2 = request.form['question2']
-        question_id2 = request.form['question_no2']
-        get_db().create_question(title, question_id2, question2)
-        answer2 = request.form['answer2']
-        answer2_a = request.form['answer2_a']
-        answer2_b = request.form['answer2_b']
-        answer2_c = request.form['answer2_c']
-        get_db().create_answer(question_id2, answer2)
-        get_db().create_answer(question_id2, answer2_a)
-        get_db().create_answer(question_id2, answer2_b)
-        get_db().create_answer(question_id2, answer2_c)
-        question3 = request.form['question3']
-        question_id3 = request.form['question_no3']
-        get_db().create_question(title, question_id3, question3)
-        answer3 = request.form['answer3']
-        answer3_a = request.form['answer3_a']
-        answer3_b = request.form['answer3_b']
-        answer3_c = request.form['answer3_c']
-        get_db().create_answer(question_id3, answer3)
-        get_db().create_answer(question_id3, answer3_a)
-        get_db().create_answer(question_id3, answer3_b)
-        get_db().create_answer(question_id3, answer3_c)
-        question4 = request.form['question4']
-        question_id4 = request.form['question_no4']
-        get_db().create_question(title, question_id4, question4)
-        answer4 = request.form['answer4']
-        answer4_a = request.form['answer4_a']
-        answer4_b = request.form['answer4_b']
-        answer4_c = request.form['answer4_c']
-        get_db().create_answer(question_id4, answer4)
-        get_db().create_answer(question_id4, answer4_a)
-        get_db().create_answer(question_id4, answer4_b)
-        get_db().create_answer(question_id4, answer4_c)
-        question5 = request.form['question5']
-        question_id5 = request.form['question_no5']
-        get_db().create_question(title, question_id5, question5)
-        answer5 = request.form['answer5']
-        answer5_a = request.form['answer5_a']
-        answer5_b = request.form['answer5_b']
-        answer5_c = request.form['answer5_c']
-        get_db().create_answer(question_id5, answer5)
-        get_db().create_answer(question_id5, answer5_a)
-        get_db().create_answer(question_id5, answer5_b)
-        get_db().create_answer(question_id5, answer5_c)
-    return render_template('generate.html')
+        print("Computing the images to be displayed based on the selected color...")
+        image_names = []
+        name = request.form['colorname']
+        name = name.upper()
+        get_db().create_color(name)
+        images = get_db().get_image_matrix()
+        for file in os.listdir(UPLOAD_FOLDER):
+            image_names.append(file)
+        hey = show_selected_images(images, image_names, COLORS[name], 60, 5)
+        get_db().delete_color()
 
-# Displaying the Surveys
-@app.route('/survey')
-def display_survey():
-    questions = []
-    con = sqlite3.connect('survey.db')
-    con.row_factory = sqlite3.Row
-    cur = con.cursor()
-    cur.execute("SELECT title FROM survey")
-    rows = cur.fetchall()
-    return render_template("survey.html", rows = rows)
+    return render_template('selection_pictures.html', name = name, hey = hey)
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=8080, debug=True)

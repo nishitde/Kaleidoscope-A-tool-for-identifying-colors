@@ -140,3 +140,14 @@ html, body{
 #footer2 {
   margin-left: -230px;
 }
+
+/* Picture cards */
+.ImageCard {
+  object-fit: contain;
+  width: 339px;
+  height: 350px;
+}
+
+#AllImages, #ColorDifferentiatedImages {
+  margin-top: 20px;
+}

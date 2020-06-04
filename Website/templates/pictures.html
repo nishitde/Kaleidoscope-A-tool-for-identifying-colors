@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% set active = "Pictures" %}
+
+{% block title %}
+Pictures
+{% endblock %}
+
+{% block content %}
+
+<!--Display all Pictures uploaded by the User -->
+<div class="container">
+    <div id = "AllImages" class="row"></div>
+</div>
+
+<script>
+$(function () {
+        $.get("api/imagesList", function (i)
+            {
+            var images;
+            images = i;
+            for (var j=0; j<images.length; j++)
+              {
+                $('#AllImages').append($('<div>').addClass('col-md-4')
+                .append($('<div>').addClass('card mb-4 shadow-sm').append($('<img>').addClass('ImageCard').attr('src', '/img/'+ images[j]))))
+              }
+            });
+        });
+</script>
+
+{% endblock %}

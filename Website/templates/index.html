@@ -20,8 +20,8 @@ Home
 <div class="container-fluid padding">
 <div class="row text-center padding">
   <div class="col-12">
-    <form enctype = "multipart/form-data" action = "save_file.py" method = "post">
-    <input type="file" name="inpFile" id="inpFile" hidden="hidden">
+    <form enctype = "multipart/form-data" action = "/uploader" method = "POST">
+    <input type="file" name="inpFile" id="inpFile" accept=".png, .jpg, .jpeg" hidden="hidden">
     <a class="btn btn-dark" id="inpFileButton">Choose File</a>
     <span id="custom-text">No file chosen</span>
     <div class="image-preview" id="imagePreview">
@@ -30,11 +30,48 @@ Home
     </div>
     <input type="submit" value="Upload" id="Upload" hidden="hidden">
     <a class="btn btn-dark" id="UploadButton">Upload File</a>
+    </form>
   </div>
 </div>
 </div>
 
+<div class="row text-center padding">
+  <div class="col-6" id="ViewAllText">
+    <p>Wish to view all your images?</p>
+  </div>
+  <div class="col-6" id="ViewAllBtn">
+    <a href="/pictures" class="btn btn-dark">View all</a>
+  </div>
+</div>
+
+<div class="col-md-6 offset-md-3">
+  <form method="POST" action="/store_color">
+    <div class="row thank">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Colors</label>
+        </div>
+        <select name="colorname" onchange="enableButton()" class="custom-select" id="inputGroupSelect01" required>
+          <option value="" disabled selected>Choose a color</option>
+          <option value="Red">Red</option>
+          <option value="Green">Green</option>
+          <option value="Blue">Blue</option>
+          <option value="Yellow">Yellow</option>
+          <option value="Black">Black</option>
+          <option value="White">White</option>
+        </select>
+        <div class="row thank4">
+          <div class="col-4">
+            <input href="/selection_pictures" type="submit" class="btn btn-dark btn-update" id="js_SubmitForm" value="Update" disabled>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
 <script>
+  /* Upload an image option & Image preview window */
   const inpFile = document.getElementById("inpFile");
   const customBtn = document.getElementById("inpFileButton");
   const customTxt = document.getElementById("custom-text");
@@ -72,6 +109,11 @@ Home
       previewImage.setAttribute("src", "");
     }
   });
+
+  /* Enable the color selection Update button */
+  function enableButton() {
+    $('#js_SubmitForm').prop('disabled', false);
+  }
 </script>
 
 <!-- About me Card -->
@@ -88,7 +130,7 @@ Home
 <div class="row text-center padding">
   <div class="col-4">
     <div class="card" id="card1">
-      <img class="card-img-top" src="/img/card.jpg">
+      <img class="card-img-top" src="/logos/card.jpg">
       <div class="card-body">
         <h4 class="card-title">Nishit De</h4>
         <p align="justify" class="card-text">Nishit has completed his undergraduate in Computer Engineering in 2019, and didn't have a job then. Now, he is currently pursuing Masters in Computer Science from Drexel University, and still doesn't have a job. Don't be like Nishit, get a job. And, maybe, give him one too.</p>
@@ -99,7 +141,7 @@ Home
 
   <div class="col-4">
     <div class="card" id="card1">
-      <img class="card-img-top" src="/img/card1.jpg">
+      <img class="card-img-top" src="/logos/card1.jpg">
       <div class="card-body">
         <h4 class="card-title">Aishwarya Patil</h4>
         <p align="justify" class="card-text">Aishwarya has completed her undergraduate in Electrical Engineering in 2015, and didn't have a job then. Now, she is currently pursuing Masters in Computer Science from Drexel University, and still doesn't have a job. Don't be like Aishwarya, get a job. And, maybe, give her one too.</p>
@@ -110,7 +152,7 @@ Home
 
   <div class="col-4">
     <div class="card" id="card1">
-      <img class="card-img-top" src="/img/card2.jpg">
+      <img class="card-img-top" src="/logos/card2.jpg">
       <div class="card-body">
         <h4 class="card-title">Atharva Deshpande</h4>
         <p align="justify" class="card-text">Atharva has completed his undergraduate in Computer Engineering in 2019, and didn't have a job then. Now, he is currently pursuing Masters in Computer Science from Drexel University, and still doesn't have a job. Don't be like Atharva, get a job. And, maybe, give him one too.</p>
