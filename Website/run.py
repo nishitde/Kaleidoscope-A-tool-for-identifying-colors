@@ -12,9 +12,8 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__, static_folder='public', static_url_path='')
 app.secret_key = b'lkj98t&%$3rhfSwu3D'
-UPLOAD_FOLDER = 'D:\Drexel Work\Spring-20\Computer Vision\Project\Kaleidoscope-A-tool-for-identifying-colors\Website\public\img'
-IMAGE_DIRECTORY = 'D:\Drexel Work\Spring-20\Computer Vision\Project\Kaleidoscope-A-tool-for-identifying-colors\Website\public\img'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+DIRECTORY = 'D:\Drexel Work\Spring-20\Computer Vision\Project\Kaleidoscope-A-tool-for-identifying-colors\Website\public\img'
+app.config['DIRECTORY'] = DIRECTORY
 
 COLORS = {'GREEN': [0, 128, 0], 'BLUE': [0, 0, 128], 'YELLOW': [255, 255, 0], 'WHITE':[255, 255, 255], 'RED' : [204, 0, 0], 'BLACK' : [1, 1, 1]}
 
@@ -62,12 +61,8 @@ def upload_file():
       if f:
           filename = secure_filename(f.filename)
           print("filename '" +filename+ "' is uploaded.")
-          f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+          f.save(os.path.join(app.config['DIRECTORY'], filename))
       return render_template('file_saved.html')
-
-# Function to find the Hex values of the colors that we identify.
-def RGB2HEX(color):
-    return "#{:02x}{:02x}{:02x}".format(int(color[0]), int(color[1]), int(color[2]))
 
 # Function to flatten the array to pass as input, and to arrange the colors in the right order.
 def get_colors(image, number_of_colors):
@@ -83,7 +78,6 @@ def get_colors(image, number_of_colors):
     center_colors = clf.cluster_centers_
 
     ordered_colors = [center_colors[i] for i in counts.keys()]
-    hex_colors = [RGB2HEX(ordered_colors[i]) for i in counts.keys()]
     rgb_colors = [ordered_colors[i] for i in counts.keys()]
 
     return rgb_colors
@@ -129,7 +123,7 @@ def store_color():
         name = name.upper()
         get_db().create_color(name)
         images = get_db().get_image_matrix()
-        for file in os.listdir(UPLOAD_FOLDER):
+        for file in os.listdir(DIRECTORY):
             print("Finished scanning '" +file+ "'")
             image_names.append(file)
         hey = show_selected_images(images, image_names, COLORS[name], 60, 5)

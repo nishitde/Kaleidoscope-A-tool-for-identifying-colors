@@ -4,7 +4,7 @@ import sqlite3
 import cv2
 
 SQLITE_PATH = os.path.join(os.path.dirname(__file__), 'kaleidoscope.db')
-IMAGE_DIRECTORY = 'D:\Drexel Work\Spring-20\Computer Vision\Project\Kaleidoscope-A-tool-for-identifying-colors\Website\public\img'
+DIRECTORY = 'D:\Drexel Work\Spring-20\Computer Vision\Project\Kaleidoscope-A-tool-for-identifying-colors\Website\public\img'
 
 image_names = []
 
@@ -28,7 +28,7 @@ class Database:
         return img
 
     def load_images(self):
-        for file in os.listdir(IMAGE_DIRECTORY):
+        for file in os.listdir(DIRECTORY):
             image_names.append(file)
         try:
             for i in image_names[1:]:
@@ -46,9 +46,9 @@ class Database:
 
     def get_image_matrix(self):
         images = []
-        for file in os.listdir(IMAGE_DIRECTORY):
+        for file in os.listdir(DIRECTORY):
             if file.endswith(".jpg") or file.endswith(".png") or file.endswith(".jpeg"):
-                images.append(self.get_image(os.path.join(IMAGE_DIRECTORY, file)))
+                images.append(self.get_image(os.path.join(DIRECTORY, file)))
         return images
 
     def get_image(self, image_path):
