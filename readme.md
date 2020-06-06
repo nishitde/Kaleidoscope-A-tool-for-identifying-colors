@@ -1,4 +1,4 @@
-﻿ <h3 align="center">Kaleidoscope: A tool for Color Identification</h3>
+<h3 align="center">Kaleidoscope: A tool for Color Identification</h3>
 
 ## Table of Contents
 
@@ -22,12 +22,12 @@ The goal of our experiment is to filter the images based on the color given by t
 We adopted **K-Means Clustering** into our application. To run the application follow the steps mentioned in the 'Getting Started' section.
 
 ### Built with
-* [Python Flask]([https://palletsprojects.com/p/flask/](https://palletsprojects.com/p/flask/))
-* [HTML]([https://en.wikipedia.org/wiki/HTML5](https://en.wikipedia.org/wiki/HTML5))
-* [CSS]([https://en.wikipedia.org/wiki/Cascading_Style_Sheets](https://en.wikipedia.org/wiki/Cascading_Style_Sheets))
-* [BootStrap]([https://getbootstrap.com/](https://getbootstrap.com/))
-* [JavaScript]([https://www.javascript.com/](https://www.javascript.com/))
-* [jQuery]([https://jquery.com/](https://jquery.com/))
+* [Flask](https://palletsprojects.com/p/flask/)
+* [HTML](https://en.wikipedia.org/wiki/HTML5)
+* [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
+* [BootStrap](https://getbootstrap.com/)
+* [JavaScript](https://www.javascript.com/)
+* [jQuery](https://jquery.com/)
 
 ## Getting Started
 Following are the instructions for running the code in two different ways:
