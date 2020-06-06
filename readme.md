@@ -50,8 +50,9 @@ Next, you will	need to install the Flask package	within	the Python	setup. This i
 ## Open the application
 
 ### Prerequisites
- 1. For re-running the project, ensure that the `img` folder in the `Kaleidoscope-A-tool-for-identifying-colors/Website/public/` directory is emptied by deleting all of its contents.
- 2. Clear out the existing database, and recreate another one by simply running the `new_db.py` file, by executing the following command in the terminal `python3 new_db.py`.
+  1. Ensure that the path in `run.py` and `db.py` under the name of `DIRECTORY` has been changed to whatever your path is for the `Kaleidoscope-A-tool-for-identifying-colors/Website/public/img/`.
+  2. For re-running the project, ensure that the `img` folder in the `Kaleidoscope-A-tool-for-identifying-colors/Website/public/img` directory is emptied by deleting all of its contents.
+  3. Clear out the existing database, and recreate another one by simply running the `new_db.py` file, by executing the following command in the terminal `python3 new_db.py`.
 
 ### Execute
 To test your setup, please download the ZIP	package available as	part	of this	project. The	directory, Kaleidoscope-A-tool-for-identifying-colors, includes files and libraries	that	we will be using. In a terminal window, please navigate to the `Kaleidoscope-A-tool-for-identifying-colors/Website/` directory and enter the following	command:
@@ -76,8 +77,9 @@ For cloning the project repository from the GitHub repository on to your local r
 ## Open the application
 
 ### Prerequisites
- 1. For re-running the project, ensure that the `img` folder in the `Kaleidoscope-A-tool-for-identifying-colors/Website/public/` directory is emptied by deleting all of its contents.
- 2. Clear out the existing database, and recreate another one by simply running the `new_db.py` file, by executing the following command in the terminal `python3 new_db.py`.
+  1. Ensure that the path in `run.py` and `db.py` under the name of `DIRECTORY` has been changed to whatever your path is for the `Kaleidoscope-A-tool-for-identifying-colors/Website/public/img/`.
+  2. For re-running the project, ensure that the `img` folder in the `Kaleidoscope-A-tool-for-identifying-colors/Website/public/` directory is emptied by deleting all of its contents.
+  3. Clear out the existing database, and recreate another one by simply running the `new_db.py` file, by executing the following command in the terminal `python3 new_db.py`.
 
 ### Execute
 In	a terminal window, please navigate to the `cd Kaleidoscope-A-tool-for-identifying-colors/Website/` directory and enter the following command:
