@@ -12,7 +12,7 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__, static_folder='public', static_url_path='')
 app.secret_key = b'lkj98t&%$3rhfSwu3D'
-DIRECTORY = 'D:\Drexel Work\Spring-20\Computer Vision\Project\Kaleidoscope-A-tool-for-identifying-colors\Website\public\img'
+DIRECTORY = 'D:\Courses\Third Quarter\Computer Vision\Project\Kaleidoscope-A-tool-for-identifying-colors\Website\public\img'
 app.config['DIRECTORY'] = DIRECTORY
 
 COLORS = {'GREEN': [0, 128, 0], 'BLUE': [0, 0, 128], 'YELLOW': [255, 255, 0], 'WHITE':[255, 255, 255], 'RED' : [204, 0, 0], 'BLACK' : [1, 1, 1]}
@@ -65,45 +65,50 @@ def upload_file():
       return render_template('file_saved.html')
 
 # Function to flatten the array to pass as input, and to arrange the colors in the right order.
-def get_colors(image, number_of_colors):
-    modified_image = cv2.resize(image, (600, 400), interpolation=cv2.INTER_AREA)
-    modified_image = modified_image.reshape(modified_image.shape[0] * modified_image.shape[1], 3)
+def get_colors(image, clusters):
+    new_image = cv2.resize(image, (600, 400), interpolation=cv2.INTER_AREA)
+    shape = new_image.shape[0] * new_image.shape[1]
+    new_image = new_image.reshape(shape, 3)
 
-    clf = KMeans(n_clusters=number_of_colors)
-    labels = clf.fit_predict(modified_image)
+    z = KMeans(n_clusters=clusters)
+    labels = z.fit_predict(new_image)
 
     counts = Counter(labels)
     counts = dict(sorted(counts.items()))
 
-    center_colors = clf.cluster_centers_
+    center_colors = z.cluster_centers_
 
-    ordered_colors = [center_colors[i] for i in counts.keys()]
-    rgb_colors = [ordered_colors[i] for i in counts.keys()]
+    color_dist = [center_colors[i] for i in counts.keys()]
+    rgb = [color_dist[i] for i in counts.keys()]
 
-    return rgb_colors
+    return rgb
 
 # Function to try and match to the top 10 color of the images. We use rgb2lab to convert the values, and compute differences using cie colorspace.
-def match_image_by_color(image, color, threshold=60, number_of_colors=10):
-    image_colors = get_colors(image, number_of_colors)
-    selected_color = rgb2lab(np.uint8(np.asarray([[color]])))
+def resultant_image(image, color, threshold=60, num_colors=10):
+    image_colors = get_colors(image, num_colors)
+    z = np.asarray([[color]])
+    z1 = np.uint8(z)
+    selected_color = rgb2lab(z1)
 
     select_image = False
-    for i in range(number_of_colors):
-        curr_color = rgb2lab(np.uint8(np.asarray([[image_colors[i]]])))
-        diff = deltaE_cie76(selected_color, curr_color)
-        if (diff < threshold):
+    for i in range(num_colors):
+        y = np.asarray([[image_colors[i]]])
+        y1 = np.uint8(y)
+        current_color = rgb2lab(y1)
+        difference = deltaE_cie76(selected_color, current_color)
+        if (difference < threshold):
             select_image = True
 
     return select_image
 
 # Function to go through all images in the set, and return relevant images as output.
-def show_selected_images(images, image_names, color, threshold, colors_to_match):
+def get_images(images, image_names, color, threshold, colors_to_match):
     index = 1
 
     selected_images = []
 
     for i in range(len(images)):
-        selected = match_image_by_color(images[i], color, threshold, colors_to_match)
+        selected = resultant_image(images[i], color, threshold, colors_to_match)
         if (selected):
             selected_images.append(image_names[i])
             index += 1
@@ -126,10 +131,10 @@ def store_color():
         for file in os.listdir(DIRECTORY):
             print("Finished scanning '" +file+ "'")
             image_names.append(file)
-        hey = show_selected_images(images, image_names, COLORS[name], 60, 5)
+        result = get_images(images, image_names, COLORS[name], 60, 5)
         get_db().delete_color()
 
-    return render_template('selection_pictures.html', name = name, hey = hey)
+    return render_template('selection_pictures.html', name = name, hey = result)
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=8080, debug=True)
