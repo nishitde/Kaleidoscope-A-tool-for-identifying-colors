@@ -18,28 +18,27 @@ Home
 </div>
 
 <div class="container-fluid padding">
-<div class="row text-center padding" id="containernoob">
+<div class="row text-center padding">
   <div class="col-12">
     <form enctype = "multipart/form-data" action = "/uploader" method = "POST">
-    <input type="file" onclick="enableUpload()" name="inpFile" id="inpFile" accept=".png, .jpg, .jpeg" hidden="hidden" required>
-    <a class="btn btn-dark" id="inpFileButton">Choose File</a>
-    <span id="custom-text">No file chosen</span>
-    <div class="image-preview" id="imagePreview">
-      <img src="" alt="Image Preview" class="image-preview__image">
-      <span class="image-preview__default-text">Image Preview</span>
-    </div>
-    <div id="button-panel">
-    <input type="submit" value="Upload" id="Upload" hidden="hidden">
-    <button class="btn btn-dark" id="UploadButton" disabled>Upload File</button>
-    
+      <input type="file" onclick="enableUpload()" name="inpFile" id="inpFile" accept=".png, .jpg, .jpeg" hidden="hidden" required>
+      <a class="btn btn-dark" id="inpFileButton">Choose File</a>
+      <span id="custom-text">No file chosen</span>
+      <div class="image-preview" id="imagePreview">
+        <img src="" alt="Image Preview" class="image-preview__image">
+        <span class="image-preview__default-text">Image Preview</span>
+      </div>
+      <div id="button-panel">
+        <input type="submit" value="Upload" id="Upload" hidden="hidden">
+        <button class="btn btn-dark" id="UploadButton" disabled>Upload File</button>
+      </div>
     </form>
     <form>
       <input type="reset" value="reset" id="Cancel" hidden="hidden">
-      <button class="btn btn-dark" href="#" id="CancelButton" disabled>Cancel</button>
+      <button class="btn btn-dark" id="CancelButton" disabled>Cancel</button>
     </form>
   </div>
   </div>
-</div>
 </div>
 
 <script>
@@ -49,9 +48,6 @@ Home
     $('#CancelButton').prop('disabled', false);
   }
 </script>
-
-
-
 
 <!-- View All Images -->
 <p id="ViewImageText">Wish to view all your images?</p>
@@ -130,6 +126,7 @@ Home
   /* Enable the color selection Update button */
   function enableButton() {
     $('#js_SubmitForm').prop('disabled', false);
+    $('#js_SubmitForm1').prop('disabled', false);
   }
 </script>
 

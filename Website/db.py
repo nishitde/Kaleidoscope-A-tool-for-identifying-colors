@@ -4,7 +4,7 @@ import sqlite3
 import cv2
 
 SQLITE_PATH = os.path.join(os.path.dirname(__file__), 'kaleidoscope.db')
-DIRECTORY = 'D:\Courses\Third Quarter\Computer Vision\Project\Kaleidoscope-A-tool-for-identifying-colors\Website\public\img'
+DIRECTORY = 'D:\Drexel Work\Spring-20\Computer Vision\Project\Kaleidoscope-A-tool-for-identifying-colors\Website\public\img'
 
 image_names = []
 
