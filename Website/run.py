@@ -12,7 +12,7 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__, static_folder='public', static_url_path='')
 app.secret_key = b'lkj98t&%$3rhfSwu3D'
-DIRECTORY = 'D:\Courses\Third Quarter\Computer Vision\Project\Kaleidoscope-A-tool-for-identifying-colors\Website\public\img'
+DIRECTORY = 'D:\Drexel Work\Spring-20\Computer Vision\Project\Kaleidoscope-A-tool-for-identifying-colors\Website\public\img'
 app.config['DIRECTORY'] = DIRECTORY
 
 COLORS = {'GREEN': [0, 128, 0], 'BLUE': [0, 0, 128], 'YELLOW': [255, 255, 0], 'WHITE':[255, 255, 255], 'RED' : [204, 0, 0], 'BLACK' : [1, 1, 1]}
@@ -120,7 +120,7 @@ def get_images(images, image_names, color, threshold, colors_to_match):
 @app.route('/store_color', methods=['GET', 'POST'])
 def store_color():
     name = ""
-    hey = []
+    result = []
     if request.method == 'POST':
         print("\nComputing the images to be displayed based on the selected color...")
         image_names = []
