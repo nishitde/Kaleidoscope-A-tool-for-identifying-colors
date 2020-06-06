@@ -27,9 +27,20 @@ html, body{
   color: white;
 }
 
-#UploadButton {
+#UploadButton{
   color: white;
-  margin-top: 2%;
+  margin-top: 10px;
+}
+
+#CancelButton {
+  color: white;
+  margin-top: 10px;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+#button-panel {
+  float:center; /* right */
 }
 
 #ImageTitle {
@@ -71,7 +82,17 @@ html, body{
   margin-top: 7%;
 }
 
+#Moods {
+  text-align: center;
+  font-size: 120%;
+  margin-top: 7%;
+}
+
 .ViewImageBtn {
+  text-align: center;
+}
+
+.Moody {
   text-align: center;
 }
 

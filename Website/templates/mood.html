@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% set active = "Mood" %}
+
+{% block title %}
+Mood
+{% endblock %}
+
+{% block content %}
+<h1 id="ImageListHead">Uploaded Images</h1>
+
+<div class="container">
+    <div id = "AllImages" class="row"></div>
+</div>
+
+<p id="BackLine">Click on 'Back' to return to the previous page.</p>
+<div class="UploadedBackBtn">
+  <a href="/" class="btn btn-dark" id="BackBtn">Back</a>
+</div>
+
+<script>
+$(function () {
+        $.get("api/imagesList", function (i)
+            {
+            var images;
+            images = i;
+            for (var j=0; j<images.length; j++)
+              {
+                $('#AllImages').append($('<div>').addClass('col-md-4')
+                .append($('<div>').addClass('card mb-4 shadow-sm').append($('<img>').addClass('ImageCard').attr('src', '/img/'+ images[j]))))
+              }
+            });
+        });
+</script>
+{% endblock %}
