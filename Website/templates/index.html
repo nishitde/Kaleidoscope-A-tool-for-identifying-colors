@@ -7,56 +7,10 @@ Home
 
 {% block content %}
 
-<!-- Upload file -->
-<div class="container-fluid padding">
-<div class="row welcome text-center">
-  <div class="col-12">
-    <h1 class="display-4" id="ImageTitle">Upload an Image</h1>
-  </div>
-  <hr>
-</div>
-</div>
-
-<div class="container-fluid padding">
-<div class="row text-center padding">
-  <div class="col-12">
-    <form enctype = "multipart/form-data" action = "/uploader" method = "POST">
-      <input type="file" onclick="enableUpload()" name="inpFile" id="inpFile" accept=".png, .jpg, .jpeg" hidden="hidden" required>
-      <a class="btn btn-dark" id="inpFileButton">Choose File</a>
-      <span id="custom-text">No file chosen</span>
-      <div class="image-preview" id="imagePreview">
-        <img src="" alt="Image Preview" class="image-preview__image">
-        <span class="image-preview__default-text">Image Preview</span>
-      </div>
-      <div id="button-panel">
-        <input type="submit" value="Upload" id="Upload" hidden="hidden">
-        <button class="btn btn-dark" id="UploadButton" disabled>Upload File</button>
-      </div>
-    </form>
-    <form>
-      <input type="reset" value="reset" id="Cancel" hidden="hidden">
-      <button class="btn btn-dark" id="CancelButton" disabled>Cancel</button>
-    </form>
-  </div>
-  </div>
-</div>
-
-<script>
-  /* Enable the upload button */
-  function enableUpload() {
-    $('#UploadButton').prop('disabled', false);
-    $('#CancelButton').prop('disabled', false);
-  }
-</script>
-
-<!-- View All Images -->
-<p id="ViewImageText">Wish to view all your images?</p>
-<div class="ViewImageBtn">
-  <a href="/pictures" class="btn btn-dark">View all</a>
-</div>
 
 <!-- Choose a color -->
-<p id="ChooseColorText">Select a color from the drop-down list:</p>
+<div class="home"></div>
+<p id="ChooseColorText">Please select a color:</p>
 <div class="col-md-6 offset-md-3">
   <form method="POST" action="/store_color">
     <div class="row thank">
@@ -75,12 +29,18 @@ Home
         </select>
         <div class="row thank4">
           <div class="col-4">
-            <input href="/selection_pictures" type="submit" class="btn btn-dark btn-update" id="js_SubmitForm" value="Update" disabled>
+            <input type="submit" class="btn btn-dark btn-update" id="js_SubmitForm" value="Go" disabled>
           </div>
         </div>
       </div>
     </div>
   </form>
+</div>
+
+<!-- View All Images -->
+<p id="ViewImageText">Wish to view all your images?</p>
+<div class="ViewImageBtn">
+  <a href="/pictures" class="btn btn-dark">View all</a>
 </div>
 
 <script>
@@ -129,52 +89,5 @@ Home
     $('#js_SubmitForm1').prop('disabled', false);
   }
 </script>
-
-<!-- About me Card -->
-<div class="container-fluid padding">
-<div class="row welcome text-center">
-  <div class="col-12">
-    <h1 class="display-4" id="cardTitle">Developers</h1>
-  </div>
-  <hr>
-</div>
-</div>
-
-<div class="container-fluid padding">
-<div class="row text-center padding">
-  <div class="col-4">
-    <div class="card" id="card1">
-      <img class="card-img-top" src="/logos/card.jpg">
-      <div class="card-body">
-        <h4 class="card-title">Nishit De</h4>
-        <p align="justify" class="card-text">Nishit has completed his undergraduate in Computer Engineering in 2019, and didn't have a job then. Now, he is currently pursuing Masters in Computer Science from Drexel University, and still doesn't have a job. Don't be like Nishit, get a job. And, maybe, give him one too.</p>
-        <a href="https://github.com/nishitde" class="btn btn-dark" target="_blank">See Projects</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-4">
-    <div class="card" id="card1">
-      <img class="card-img-top" src="/logos/card1.jpg">
-      <div class="card-body">
-        <h4 class="card-title">Aishwarya Patil</h4>
-        <p align="justify" class="card-text">Aishwarya has completed her undergraduate in Electrical Engineering in 2015, and didn't have a job then. Now, she is currently pursuing Masters in Computer Science from Drexel University, and still doesn't have a job. Don't be like Aishwarya, get a job. And, maybe, give her one too.</p>
-        <a href="https://github.com/nishitde" class="btn btn-dark" target="_blank">See Projects</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-4">
-    <div class="card" id="card1">
-      <img class="card-img-top" src="/logos/card2.jpg">
-      <div class="card-body">
-        <h4 class="card-title">Atharva Deshpande</h4>
-        <p align="justify" class="card-text">Atharva has completed his undergraduate in Computer Engineering in 2019, and didn't have a job then. Now, he is currently pursuing Masters in Computer Science from Drexel University, and still doesn't have a job. Don't be like Atharva, get a job. And, maybe, give him one too.</p>
-        <a href="https://github.com/nishitde" class="btn btn-dark" target="_blank">See Projects</a>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
 
 {% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% set active = "About Us" %}
+
+{% block title %}
+About Us
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid padding">
+<div class="row welcome text-center">
+  <div class="col-12">
+    <h1 class="display-4" id="cardTitle">About Kaleidoscope</h1>
+  </div>
+  <hr>
+</div>
+</div>
+
+<div class="container-fluid padding">
+<div class="row text-center padding">
+  <div class="col-12">
+  <p align="left" class="card-text">
+    We cannot deny the fact that there is a connection between human emotions and colors. The colors affect our mood which can be proven from many episodes from our day to day lives. Especially, looking at the current situation around the globe, everybody is home for a really long time. During these times, it refreshes our memory to look back at the photos of one bright summer day all yellow, or a peaceful picnic sitting on a widely spread patch of green grass. Gazing at those colored images will give you a boost of energy on a day you would typically be running low. Therefore, instead of having to scroll through old images maybe a year old or more, we would rather just prefer to filter the images based on the color users want to perceive. So in our website, Kaleidoscope, users are able to search for the images by entering a color of their choice. So go ahead and have fun you guys!</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- About me Card -->
+<div class="container-fluid padding">
+<div class="row welcome text-center">
+  <div class="col-12">
+    <h1 class="display-4" id="cardTitle">Developers</h1>
+  </div>
+  <hr>
+</div>
+</div>
+
+<div class="container-fluid padding">
+<div class="row text-center padding">
+
+
+  <div class="col-4">
+    <div class="card" id="card1">
+      <img class="card-img-top" src="/logos/card1.jpg">
+      <div class="card-body">
+        <h4 class="card-title">Aishwarya Patil</h4>
+        <p align="justify" class="card-text">Aishwarya is currently pursuing her Master's in Computer Science at Drexel University. Her favorite color is Yellow and she says," I see Yellow and I cheer up, like it is my cheerleader. When life gives me lemons, I am in fact happy because they are Yellow!"</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-4">
+    <div class="card" id="card1">
+      <img class="card-img-top" src="/logos/card2.jpg">
+      <div class="card-body">
+        <h4 class="card-title">Atharva Deshpande</h4>
+        <p align="justify" class="card-text">Atharva is currently pursuing Masters in Computer Science at Drexel University. His favorite color is Blue and he says,"Blue is the color of the sky and sea. It is often associated with depth and stability.It produces a calming effect." </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-4">
+    <div class="card" id="card1">
+      <img class="card-img-top" src="/logos/card3.jpg">
+      <div class="card-body">
+        <h4 class="card-title">Nishit De</h4>
+        <p align="justify" class="card-text">Nishit is currently pursuing Masters in Computer Science at Drexel University. His favorite color is Black and he says,"Black color has a special full-spectrum status when it comes to the feelings it reflects - Power, elegance, mystery, bleakness. Maybe it’s because black goes with everything, and brings out the best or worst in whatever it surrounds."</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Footer -->
+<footer>
+<div class="container-fluid padding indent">
+  <div class="row text-center">
+    <div class="col-12">
+      <a id="FooterHead">Kaleidoscope</a>
+      <hr class="light" width="70%" id="SmallLine">
+      <p id="FooterText">Drexel University</p>
+      <p id="FooterText">Department of Computer Science</p>
+      <p id="FooterText">Philadelphia, PA, 19104</p>
+    </div>
+  </div>
+</div>
+</footer>
+
+{% endblock %}

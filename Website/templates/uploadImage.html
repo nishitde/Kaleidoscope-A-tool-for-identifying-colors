@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% set active = "Home" %}
+
+{% block title %}
+Upload Image
+{% endblock %}
+
+{% block content %}
+<!-- Upload file -->
+<div class="container-fluid padding">
+<div class="row welcome text-center">
+  <div class="col-12">
+    <h1 class="display-2" id="ImageTitle">Upload an Image</h1>
+  </div>
+  <hr>
+</div>
+</div>
+
+<div class="container-fluid padding">
+<div class="row text-center padding">
+  <div class="col-12">
+    <form enctype = "multipart/form-data" action = "/uploader" method = "POST">
+      <input type="file" onchange="enableUpload()" name="inpFile" id="inpFile" accept=".png, .jpg, .jpeg" hidden="hidden" required>
+      <a class="btn btn-choose" id="inpFileButton">Choose File</a>
+      <span id="custom-text">No file chosen</span>
+      <div class="image-preview" id="imagePreview">
+        <img src="" alt="Image Preview" class="image-preview__image">
+        <span class="image-preview__default-text">Image Preview</span>
+      </div>
+      <div class="buttonSpace" id="button-panel">
+        <input type="submit" value="Upload" id="Upload" hidden="hidden">
+        <button class="btn btn-dark" id="UploadButton" disabled>Upload File</button>
+      </div>
+    </form>
+    <form>
+      <div class="buttonSpace">
+        <input type="reset" value="reset" id="Cancel" hidden="hidden">
+        <button class="btn btn-dark" id="CancelButton" disabled>Cancel</button>
+      </div>
+    </form>
+  </div>
+  </div>
+</div>
+
+<script>
+  /* Enable the upload button */
+  function enableUpload() {
+    $('#UploadButton').prop('disabled', false);
+    $('#CancelButton').prop('disabled', false);
+  }
+
+  /* Upload an image option & Image preview window */
+  const inpFile = document.getElementById("inpFile");
+  const customBtn = document.getElementById("inpFileButton");
+  const customTxt = document.getElementById("custom-text");
+  const upload = document.getElementById("Upload")
+  const customUploadBtn = document.getElementById("UploadButton");
+  const previewContainer = document.getElementById("imagePreview");
+  const previewImage = previewContainer.querySelector(".image-preview__image");
+  const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
+
+  customBtn.addEventListener("click", function() {
+    inpFile.click();
+  });
+
+  customUploadBtn.addEventListener("click", function() {
+    upload.click();
+  });
+
+  inpFile.addEventListener("change", function() {
+    const file = this.files[0];
+
+    if(file) {
+      const reader = new FileReader();
+
+      previewDefaultText.style.display = "none";
+      previewImage.style.display = "block";
+
+      reader.addEventListener("load", function() {
+        previewImage.setAttribute("src", this.result);
+      });
+
+      reader.readAsDataURL(file);
+    } else {
+      previewDefaultText.style.display = null;
+      previewImage.style.display = null;
+      previewImage.setAttribute("src", "");
+    }
+  });
+
+  /* Enable the color selection Update button */
+  function enableButton() {
+    $('#js_SubmitForm').prop('disabled', false);
+    $('#js_SubmitForm1').prop('disabled', false);
+  }
+
+</script>
+
+{% endblock %}

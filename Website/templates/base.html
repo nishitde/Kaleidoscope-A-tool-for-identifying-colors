@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kaleidoscope :{% block title %}{% endblock %}</title>
     <link href="/packages/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
     <script src="/packages/lib/jquery/jquery-3.3.1.min.js"></script>
     <script src="/packages/lib/popper/popper.min.js"></script>
@@ -12,61 +13,44 @@
   </head>
   <body>
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
-      <div class="container">
-        <a class="navbar-brand" href="/">Kaleidoscope</a>
-        <div class="collapse navbar-collapse" id="navbarResponsive"></div>
-      </div>
-    </nav>
+<!--    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">-->
+<!--      <div class="container">-->
+<!--        <div class="row">-->
+<!--          <div class="col-6">-->
+<!--          <a class="navbar-brand" href="/">Kaleidoscope</a>-->
+<!--          </div>-->
+<!--          <div class="col-6 ">-->
+<!--          <a class="btn btn-dark" id="inpFileButton">Upload Image</a>-->
+<!--          </div>-->
+<!--          <div class="collapse navbar-collapse" id="navbarResponsive"></div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </nav>-->
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand logo" href="/">Kaleidoscope</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link {% if active == 'Pictures' %} active{% endif %}" href="/pictures">Pictures</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if active == 'About Us' %} active{% endif %}" href="/aboutus">About Us</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <a class="btn btn-dark {% if active == 'Upload Image' %} active{% endif %}" href="/uploadImage">Upload Image</a>
+    </form>
+  </div>
+</nav>
     <main>
       <div class="container content">
           {% block content %}{% endblock %}
       </div>
-
-      <!-- Footer -->
-      <footer id="footer">
-      <div class="container-fluid padding">
-      <div class="row text-center">
-        <div class="col-md-4" id="footer1">
-          <a id="FooterHead">Kaleidoscope</a>
-          <hr class="light" width="70%" id="SmallLine">
-          <p id="FooterText">Drexel University</p>
-          <p id="FooterText">Department of Computer Science</p>
-          <p id="FooterText">Philadelphia, PA, 19104</p>
-        </div>
-        <div class="col-md-4">
-          <div class="vl"></div>
-        </div>
-        <div class="col-md-4" id="footer2">
-          <h4 id="ConnectHeader">CONNECT</h4>
-          <hr class="light" width="50%">
-          <div class="col">
-            <a id="ConnectName">Nishit: </a>
-            <a href="https://www.facebook.com/nishit.de/" target="_blank"><img src="/logos/facebook-square-brands.svg" id="ConnectIconImage" class="filter-blue"></a>
-            <a href="https://www.instagram.com/de_nishit97/" target="_blank"><img src="/logos/instagram-brands.svg" id="ConnectIconImage" class="filter-purple"></a>
-            <a href="https://www.linkedin.com/in/nishitde/" target="_blank"><img src="/logos/linkedin-brands.svg" id="ConnectIconImage" class="filter-darkblue"></a>
-          </div>
-          <div class="col">
-            <a id="ConnectName">Aishwarya: </a>
-            <a href="https://www.facebook.com/nishit.de/" target="_blank"><img src="/logos/facebook-square-brands.svg" id="ConnectIconImage" class="filter-blue"></a>
-            <a href="https://www.instagram.com/aaishwarya92/" target="_blank"><img src="/logos/instagram-brands.svg" id="ConnectIconImage" class="filter-purple"></a>
-            <a href="https://www.linkedin.com/in/aishwarya-patil2792/" target="_blank"><img src="/logos/linkedin-brands.svg" id="ConnectIconImage" class="filter-darkblue"></a>
-          </div>
-          <div class="col">
-            <a id="ConnectName">Atharva: </a>
-            <a href="https://www.facebook.com/atharva.deshpande.148" target="_blank"><img src="/logos/facebook-square-brands.svg" id="ConnectIconImage" class="filter-blue"></a>
-            <a href="https://www.instagram.com/atharva.deshpande/" target="_blank"><img src="/logos/instagram-brands.svg" id="ConnectIconImage" class="filter-purple"></a>
-            <a href="https://www.linkedin.com/in/atharva-deshpande-b9697619b/" target="_blank"><img src="/logos/linkedin-brands.svg" id="ConnectIconImage" class="filter-darkblue"></a>
-          </div>
-        </div>
-        <div class="col-12">
-          <hr class="light">
-          <p id="footerLink">&copy; Kaleidoscope</p>
-        </div>
-      </div>
-      </div>
-      </footer>
     </main>
   </body>
 </html>

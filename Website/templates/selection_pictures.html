@@ -8,12 +8,12 @@ Selected Pictures
 {% block content %}
 
 <!--Display all Selected Pictures by choosing the color -->
-<h1 id="SelectedImageHead">Color sorted Images</h1>
+<!--<h1 id="SelectedImageHead">Color sorted Images</h1>-->
 
 <div class="indent">
   <div class="container" >
     <div class="row">
-      {% for img in hey %}
+      {% for img in final_matched_images %}
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm" id="ColorDifferentiatedImages">
             <img class="ImageCard" src="/img/{{ img }}">
@@ -24,7 +24,7 @@ Selected Pictures
   </div>
 </div>
 
-<p id="BackLine">Click on 'Back' to return to the previous page.</p>
+<!--<p id="BackLine">Click on 'Back' to return to the previous page.</p>-->
 <div class="SelectedBackBtn">
   <a href="/" class="btn btn-dark" id="BackBtn">Back</a>
 </div>

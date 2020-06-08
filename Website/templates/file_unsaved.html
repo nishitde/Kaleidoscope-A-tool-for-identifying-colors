@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% set active = "File Saved" %}
+
+{% block title %}
+Error
+{% endblock %}
+
+{% block content %}
+
+<h1 id="BackHead">File already exists!</h1>
+
+<p id="BackLine">Click on 'Back' to return to the previous page.</p>
+<div class="BackBtn">
+  <a href="/" class="btn btn-dark" id="BackBtn">Back</a>
+</div>
+
+{% endblock %}
